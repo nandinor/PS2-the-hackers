@@ -1,3 +1,7 @@
+Mireya Smith
+Richard Lobo
+Norman Andino
+
 ## Question 1
 grep GNV /ufrc/bsc4452/share/Class_Files/data/flights.May2017-Apr2018.csv >> ./GNV.flights
 grep -E '\s\w\w\"\,\"\w{2}\",\"[[:digit:]]*\",[[:digit:]]*\.[[:digit:]]*,1' GNV.flights | wc -l
