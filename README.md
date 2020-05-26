@@ -8,7 +8,7 @@ You should work in groups of 2 to 4 (not alone and not more than 4). If this is 
 1. Mireya Smith
 1. Richard Lobo
 1. Norman Andino
-1. 
+#### all of us worked together to figure out how to create the commands and solve it.
 
 ## Due date
 **It is my hope that is can be turned in on Friday, May 22nd**, but I will take it until May 26th at the latest.
@@ -23,14 +23,73 @@ I have provided a dataset that you will use for this. The dataset and it's descr
 
 The goal of this project is to write a Bash script that does the following:
 1. Counts the number of flights that were delayed more than 15 minutes into or out of Gainesville, FL (airport code GNV) during the timeframe covered by the dataset. (*2 points*)
-2. Produce a table (text is fine) with the data to fill in this table (*13 points*):
+##
+    grep GNV /ufrc/bsc4452/share/Class_Files/data/flights.May2017-Apr2018.csv >> ./GNV.flights
+    grep -E '\s\w\w\"\,\"\w{2}\",\"[[:digit:]]*\",[[:digit:]]*\.[[:digit:]]*,1' GNV.flights | wc -l
+Result: 803 delayed flights
 
+2. Produce a table (text is fine) with the data to fill in this table (*13 points*):
 
 GNV to: | Total flights | Total flights delayed (>15min) | Total flights delayed due to Weather
 --------|---------------|------------------------|-------------------------------
-ATL |
-CLT |
-MIA |
+ATL |1476|262|15|
+CLT |476|107|3|
+MIA |205|30|0|
+
+GNV to ATL
+
+Total
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"ATL' GNV.flights >> GNVtoATL 
+    wc –l GNVtoATL
+1476 flight
+
+Delayed 15 min
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"ATL\"\,\"Atlanta\, GA\"\,\"GA\"\,\"[[:digit:]]*\",[[:digit:]]*\.[[:digit:]]*\,1' GNV.flights | wc –l
+262 flight
+
+Delayed by wether
+##
+    awk -F, '{print $24}' GNVtoATL | sort
+15 flights
+
+GNV to CLT
+
+Total
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"CLT' GNV.flights >> GNVtoCLT 
+    wc –l GNVtoCLT
+476 flight
+
+Delayed 15 min
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"CLT\"\,\"Charlotte\, NC\"\,\"NC\"\,\"[[:digit:]]*\",[[:digit:]]*\.[[:digit:]]*\,1' GNV.flights | wc –l
+107 flight
+
+Delayed by wether
+##
+    awk -F, '{print $24}' GNVtoATL | sort
+3 flights
+
+GNV to MIA
+
+Total
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"MIA' GNV.flights >> GNVtoMIA 
+    wc –l GNVtoMIA
+205 flight
+
+Delayed 15 min
+##
+    grep -E 'GNV\"\,\"Gainesville, FL\"\,\"FL\"\,\"MIA\"\,\"Miami\, FL\"\,\"FL\"\,\"[[:digit:]]*\",[[:digit:]]*\.[[:digit:]]*\,1' GNV.flights | wc –l
+30 flight
+
+Delayed by wether
+##
+    awk -F, '{print $24}' GNVtoATL | sort
+0 flights
+
 
 3. Within a function, print a list of all unique airport codes contained in the dataset. (*3 points*)
 
