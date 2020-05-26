@@ -36,7 +36,7 @@ ATL |1476|262|15|
 CLT |476|107|3|
 MIA |205|30|0|
 
-GNV to ATL
+### GNV to ATL
 
 Total
 ##
@@ -54,7 +54,7 @@ Delayed by wether
     awk -F, '{print $24}' GNVtoATL | sort
 15 flights
 
-GNV to CLT
+### GNV to CLT
 
 Total
 ##
@@ -72,7 +72,7 @@ Delayed by wether
     awk -F, '{print $24}' GNVtoATL | sort
 3 flights
 
-GNV to MIA
+### GNV to MIA
 
 Total
 ##
@@ -90,10 +90,56 @@ Delayed by wether
     awk -F, '{print $24}' GNVtoATL | sort
 0 flights
 
-
 3. Within a function, print a list of all unique airport codes contained in the dataset. (*3 points*)
+##
+    awk -F',' '{print $7}' /ufrc/bsc4452/share/Class_Files/data/flights.May2017-Apr2018.csv >> ./test1/airport.code2
+    sort test1/airport.code2 | uniq >> uniq.airport.code2
+    wc -l uniq.airport.code2
+    grep -v '\"DEST_CITY_NAME\"' test1/uniq.airport.code | wc -l
+Total of 350 airports
 
 4. Within a function list the cities in Florida that have airports in the dataset. (*2 points*)
+##
+    awk -F',' '{print $3,$4,$5}' /ufrc/bsc4452/share/Class_Files/data/flights.May2017-Apr2018.csv >> test1/question4
+    grep 'FL\"$' test1/question4 | sort | uniq | wc –l
+20 cities
+
+"DAB" "Daytona Beach  FL"
+
+"ECP" "Panama City  FL"
+
+"EYW" "Key West  FL"
+
+"FLL" "Fort Lauderdale  FL"
+
+"GNV" "Gainesville  FL"
+
+"JAX" "Jacksonville  FL"
+
+"MCO" "Orlando  FL"
+
+"MIA" "Miami  FL"
+
+"MLB" "Melbourne  FL"
+
+"PBI" "West Palm Beach/Palm Beach  FL"
+
+"PGD" "Punta Gorda  FL"
+
+"PIE" "St. Petersburg  FL"
+
+"PNS" "Pensacola  FL"
+
+"RSW" "Fort Myers  FL"
+
+"SFB" "Sanford  FL"
+
+"SRQ" "Sarasota/Bradenton  FL"
+
+"TLH" "Tallahassee  FL"
+
+"TPA" "Tampa  FL"
+
 
 **Bonus question:**  Asks for user input (see chapter 28) to enter either a airport code or city, state name and then calculates the number of flights as in question 1. (*5 points extra credit*)
 
